@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from './config/swagger';
 import authRoutes from './routes/authRoutes';
+import adminRoutes from './routes/adminRoutes';
 import { UserModel } from './models/User';
 
 dotenv.config();
@@ -33,6 +34,7 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
 
 // API Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/admin', adminRoutes);
 
 /**
  * @swagger
@@ -71,6 +73,10 @@ const startServer = async (): Promise<void> => {
   try {
     await UserModel.createTable();
     console.log('Database tables initialized');
+    
+    // Seed test users
+    await UserModel.seedTestUsers();
+    console.log('Test users seeded');
     
     app.listen(PORT, () => {
       console.log(`User Service running on port ${PORT}`);

@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { AuthResponse, LoginRequest, RegisterRequest } from '@/types/auth';
+import { AuthResponse, LoginRequest, RegisterRequest, User } from '@/types/auth';
 import { Todo, CreateTodoRequest, UpdateTodoRequest, TodoStats } from '@/types/todo';
 
-const USER_SERVICE_URL = process.env.NEXT_PUBLIC_USER_SERVICE_URL || 'http://localhost:3003';
-const TODO_SERVICE_URL = process.env.NEXT_PUBLIC_TODO_SERVICE_URL || 'http://localhost:3004';
+const USER_SERVICE_URL = process.env.NEXT_PUBLIC_USER_SERVICE_URL || 'http://localhost:3001';
+const TODO_SERVICE_URL = process.env.NEXT_PUBLIC_TODO_SERVICE_URL || 'http://localhost:3002';
 
 // Create API instances
 const userApi = axios.create({
@@ -22,6 +22,15 @@ const todoApi = axios.create({
 
 // Add token to todo API requests
 todoApi.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// Add token to user API requests
+userApi.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
@@ -65,6 +74,24 @@ export const todosApi = {
 
   getStats: async (): Promise<{ stats: TodoStats }> => {
     const response = await todoApi.get('/api/todos/stats');
+    return response.data;
+  },
+};
+
+// Admin API
+export const adminApi = {
+  getAllUsers: async (): Promise<{ users: User[]; message: string }> => {
+    const response = await userApi.get('/api/admin/users');
+    return response.data;
+  },
+
+  deleteUser: async (userId: string): Promise<{ message: string }> => {
+    const response = await userApi.delete(`/api/admin/users/${userId}`);
+    return response.data;
+  },
+
+  updateUserRole: async (userId: string, role: string): Promise<{ message: string; user: User }> => {
+    const response = await userApi.put(`/api/admin/users/${userId}/role`, { role });
     return response.data;
   },
 };

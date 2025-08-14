@@ -92,7 +92,8 @@ export class AuthController {
 
       const tokenPayload: JWTPayload = {
         uuid: user.uuid,
-        user_email: user.user_email
+        user_email: user.user_email,
+        role: user.role
       };
 
       const token = jwt.sign(tokenPayload, JWT_SECRET, { 
@@ -103,7 +104,8 @@ export class AuthController {
         token,
         user: {
           uuid: user.uuid,
-          user_email: user.user_email
+          user_email: user.user_email,
+          role: user.role
         }
       };
 

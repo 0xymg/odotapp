@@ -1,6 +1,7 @@
 export interface User {
   uuid: string;
   user_email: string;
+  role: string;
 }
 
 export interface LoginRequest {

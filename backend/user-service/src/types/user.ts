@@ -3,6 +3,7 @@ export interface User {
   uuid: string;
   user_email: string;
   user_pwd: string;
+  role: string;
   created_at?: Date;
   updated_at?: Date;
 }
@@ -22,12 +23,14 @@ export interface LoginResponse {
   user: {
     uuid: string;
     user_email: string;
+    role: string;
   };
 }
 
 export interface JWTPayload {
   uuid: string;
   user_email: string;
+  role: string;
   iat?: number;
   exp?: number;
 }

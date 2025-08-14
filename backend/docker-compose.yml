@@ -1,0 +1,98 @@
+version: '3.8'
+
+services:
+  # User Service Database
+  user-postgres:
+    image: postgres:15-alpine
+    container_name: user-postgres
+    environment:
+      POSTGRES_DB: user_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5434:5432"
+    volumes:
+      - user_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - odotapp-network
+
+  # Todo Service Database
+  todo-postgres:
+    image: postgres:15-alpine
+    container_name: todo-postgres
+    environment:
+      POSTGRES_DB: todo_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5435:5432"
+    volumes:
+      - todo_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - odotapp-network
+
+  # User Service
+  user-service:
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    container_name: user-service
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: 3001
+      JWT_SECRET: your-super-secret-jwt-key-development
+      DB_HOST: user-postgres
+      DB_PORT: 5432
+      DB_NAME: user_db
+      DB_USER: postgres
+      DB_PASSWORD: password
+      NODE_ENV: development
+    depends_on:
+      user-postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - odotapp-network
+
+  # Todo Service
+  todo-service:
+    build:
+      context: ./todo-service
+      dockerfile: Dockerfile
+    container_name: todo-service
+    ports:
+      - "3002:3002"
+    environment:
+      PORT: 3002
+      JWT_SECRET: your-super-secret-jwt-key-development
+      DB_HOST: todo-postgres
+      DB_PORT: 5432
+      DB_NAME: todo_db
+      DB_USER: postgres
+      DB_PASSWORD: password
+      NODE_ENV: development
+    depends_on:
+      todo-postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - odotapp-network
+
+volumes:
+  user_postgres_data:
+  todo_postgres_data:
+
+networks:
+  odotapp-network:
+    driver: bridge
