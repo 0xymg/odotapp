@@ -54,8 +54,6 @@ backend/
 ## � Quick Start
 
 ```bash
-# Start all services with Docker
-docker-compose up -d
 
 # Access services
 # User Service: http://localhost:3001
