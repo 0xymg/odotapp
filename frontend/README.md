@@ -10,16 +10,6 @@ Modern React frontend built with Next.js 15, TypeScript, and Tailwind CSS.
 - **next-themes** for dark/light mode
 - **Axios** for API calls
 
-## 📁 Structure
-
-```
-src/
-├── app/              # Pages (landing, dashboard, auth, admin)
-├── components/       # Reusable UI components
-├── contexts/         # Auth & Theme contexts
-├── lib/             # API client & utilities
-└── types/           # TypeScript definitions
-```
 
 ## 🎨 Features
 
@@ -58,7 +48,6 @@ NEXT_PUBLIC_TODO_SERVICE_URL=http://localhost:3002
 npm run dev      # Development server
 npm run build    # Production build
 npm run start    # Production server
-npm run lint     # ESLint
 ```
 
 ## 🐳 Docker
