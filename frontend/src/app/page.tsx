@@ -64,7 +64,7 @@ export default function LandingPage() {
             {/* Badge */}
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-8">
               <Sparkles className="h-3 w-3 text-primary mr-2" />
-              <span className="text-xs font-medium text-primary">New: Real-time sync</span>
+              <span className="text-xs font-medium text-primary">New: edit todos</span>
             </div>
             
             <h1 className="text-6xl md:text-7xl font-bold text-foreground mb-8 tracking-tight">
