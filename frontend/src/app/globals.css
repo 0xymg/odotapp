@@ -280,7 +280,11 @@
 
   /* Better text selection */
   ::selection {
-    @apply bg-primary/20 text-foreground;
+    @apply bg-red-100 text-red-900;
+  }
+  
+  .dark ::selection {
+    @apply bg-red-900/30 text-red-200;
   }
 
   /* Notion-style separator */
