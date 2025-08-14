@@ -16,7 +16,13 @@ npm run dev
 # User Service: http://localhost:3001
 # Todo Service: http://localhost:3002
 # API Docs: http://localhost:3001/docs & http://localhost:3002/docs
-```Script, Express, and PostgreSQL.
+```
+```
+backend/
+├── user-service/     # Authentication & user management (Port 3001)
+└── todo-service/     # Todo CRUD operations (Port 3002)
+
+```
 
 ## 🚀 Tech Stack
 
@@ -29,12 +35,7 @@ npm run dev
 
 ## 📁 Services
 
-```
-backend/
-├── user-service/     # Authentication & user management (Port 3001)
-└── todo-service/     # Todo CRUD operations (Port 3002)
 
-```
 
 ### User Service (Port 3001)
 - ✅ User registration & login
@@ -93,12 +94,11 @@ erDiagram
 
 ### User Service
 ```
-POST /api/auth/register         # User registration
-POST /api/auth/login            # User login
-GET  /api/admin/users           # Get all users (admin)
+POST /api/auth/register  # User registration
+POST /api/auth/login     # User login
+GET  /api/admin/users    # Get all users (admin)
 PUT  /api/admin/users/:id/role  # Update user role
 DELETE /api/admin/users/:id     # Delete user
-GET  /health                    # Health check
 ```
 
 ### Todo Service
@@ -108,7 +108,6 @@ POST   /api/todos        # Create todo
 PUT    /api/todos/:id    # Update todo
 DELETE /api/todos/:id    # Delete todo
 GET    /api/todos/stats  # Get todo statistics
-GET    /health           # Health check
 ```
 
 ## � Development
@@ -145,13 +144,11 @@ cd todo-service && npm test
 
 ```bash
 # Build and run individual services
-cd user-service
-docker build -t user-service .
-docker run -p 3001:3001 user-service
+docker build -t user-service ./user-service
+docker build -t todo-service ./todo-service
 
-cd todo-service
-docker build -t todo-service .
-docker run -p 3002:3002 todo-service
+# Or use compose for full stack
+docker-compose up --build
 ```
 
 ## � Health Checks
