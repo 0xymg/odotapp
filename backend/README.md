@@ -1,6 +1,22 @@
 # ODOT Backend
 
-Node.js microservices with TypeScript, Express, and PostgreSQL.
+Node.js microservice## 🚀 Quick Start
+
+```bash
+# Start individual services
+cd user-service
+npm install
+npm run dev
+
+cd todo-service
+npm install
+npm run dev
+
+# Access services
+# User Service: http://localhost:3001
+# Todo Service: http://localhost:3002
+# API Docs: http://localhost:3001/docs & http://localhost:3002/docs
+```Script, Express, and PostgreSQL.
 
 ## 🚀 Tech Stack
 
@@ -16,8 +32,8 @@ Node.js microservices with TypeScript, Express, and PostgreSQL.
 ```
 backend/
 ├── user-service/     # Authentication & user management (Port 3001)
-├── todo-service/     # Todo CRUD operations (Port 3002)
-└── docker-compose.yml
+└── todo-service/     # Todo CRUD operations (Port 3002)
+
 ```
 
 ### User Service (Port 3001)
@@ -48,21 +64,41 @@ docker-compose up -d
 
 ## 🗄️ Database Schema
 
-**Users Table:**
-- `id`, `uuid`, `user_email`, `user_pwd`, `role`, `created_at`, `updated_at`
-
-**Todos Table:**
-- `id`, `uuid`, `content`, `user_uuid`, `completed`, `created_at`, `updated_at`
+```mermaid
+erDiagram
+    USERS {
+        int id PK
+        varchar uuid UK "UUID v4"
+        varchar user_email UK "Email address"
+        varchar user_pwd "Hashed password"
+        varchar role "user or admin"
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    TODOS {
+        int id PK
+        varchar uuid UK "UUID v4"
+        varchar content "Todo content"
+        varchar user_uuid FK "References users.uuid"
+        boolean completed "Default false"
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    USERS ||--o{ TODOS : "has many"
+```
 
 ## � Key Endpoints
 
 ### User Service
 ```
-POST /api/auth/register  # User registration
-POST /api/auth/login     # User login
-GET  /api/admin/users    # Get all users (admin)
+POST /api/auth/register         # User registration
+POST /api/auth/login            # User login
+GET  /api/admin/users           # Get all users (admin)
 PUT  /api/admin/users/:id/role  # Update user role
 DELETE /api/admin/users/:id     # Delete user
+GET  /health                    # Health check
 ```
 
 ### Todo Service
@@ -72,6 +108,7 @@ POST   /api/todos        # Create todo
 PUT    /api/todos/:id    # Update todo
 DELETE /api/todos/:id    # Delete todo
 GET    /api/todos/stats  # Get todo statistics
+GET    /health           # Health check
 ```
 
 ## � Development
@@ -108,11 +145,13 @@ cd todo-service && npm test
 
 ```bash
 # Build and run individual services
-docker build -t user-service ./user-service
-docker build -t todo-service ./todo-service
+cd user-service
+docker build -t user-service .
+docker run -p 3001:3001 user-service
 
-# Or use compose for full stack
-docker-compose up --build
+cd todo-service
+docker build -t todo-service .
+docker run -p 3002:3002 todo-service
 ```
 
 ## � Health Checks
@@ -143,5 +182,3 @@ DB_PASSWORD=password
 ```
 
 ---
-
-Part of the ODOT todo application suite.
