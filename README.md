@@ -27,13 +27,8 @@ Rather than treating this as just another coding exercise, I approached it **wit
   
 
 ### Screenshots
-
-| Landing Page | Todo Dashboard |
-
-|--------------|----------------|
-
-| ![Landing Page](screenshots/landing.jpeg) | ![Todo Dashboard](screenshots/dashboard.jpeg) |
-
+ ![Landing Page](screenshots/landing.jpeg)  
+ ![Todo Dashboard](screenshots/dashboard.jpeg)
 
 ---
 
