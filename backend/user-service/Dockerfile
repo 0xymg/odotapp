@@ -1,5 +1,8 @@
 FROM node:18-alpine AS builder
 
+# Install build dependencies
+RUN apk add --no-cache python3 make g++
+
 WORKDIR /app
 
 COPY package*.json ./
@@ -9,6 +12,9 @@ COPY . .
 RUN npm run build
 
 FROM node:18-alpine AS production
+
+# Install runtime dependencies for bcrypt
+RUN apk add --no-cache python3 make g++
 
 WORKDIR /app
 
