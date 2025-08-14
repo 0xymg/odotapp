@@ -149,27 +149,75 @@ Detailed API documentation can be found in:
 
 ### Prerequisites
 
-- Docker & Docker Compose
-- Node.js (v18+)
-- pnpm or npm
+- Docker Desktop installed and running
+- Git
 
   
 
-### Steps
+### Quick Start (Recommended)
+
+The easiest way to run the entire application:
 
 ```bash
+# 1. Clone the repository
+git clone https://github.com/0xymg/odotapp.git
+cd odotapp
 
-# 1. Clone repository
-git  clone  https://github.com/yourusername/odot-app.git
-cd  odot-app
+# 2. Start the entire application with one command
+./start.sh
+```
 
-# 2. Start containers
-docker-compose  up  --build
+That's it! The application will be available at:
+- **Frontend**: http://localhost:3000
+- **User Service API**: http://localhost:3001
+- **Todo Service API**: http://localhost:3002
+- **User Database**: localhost:5434
+- **Todo Database**: localhost:5435
 
-# 3. Access frontend
-App: http://localhost:3000
-User Service: http://localhost:3001
-Todo Service: http://localhost:3002
+### Alternative Docker Commands
+
+```bash
+# Start all services
+docker-compose up --build -d
+
+# Stop all services
+docker-compose down
+
+# View logs
+docker-compose logs -f
+
+# Check service status
+docker-compose ps
+
+# Stop application (using script)
+./stop.sh
+
+# Remove all data (reset databases)
+docker-compose down --volumes
+```
+
+### Test Users
+
+When the application starts, these test users are automatically created:
+
+- **Admin User**: admin@odotapp.com / admin123
+- **Regular User**: test@example.com / user123
+
+### Manual Development Setup
+
+If you prefer to run services individually for development:
+
+#### Backend Services Only
+```bash
+cd backend
+docker-compose up -d
+```
+
+#### Frontend Development
+```bash
+cd frontend
+npm install
+npm run dev
 ```
 
 
