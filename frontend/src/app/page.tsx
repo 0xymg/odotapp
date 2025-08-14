@@ -70,8 +70,8 @@ export default function LandingPage() {
             <h1 className="text-6xl md:text-7xl font-bold text-foreground mb-8 tracking-tight">
               Think better,
               <br />
-              <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-                organize smarter
+              <span className="bg-gradient-to-r text to-primary/70 bg-clip-text ">
+                Complete smarter
               </span>
             </h1>
             
@@ -276,14 +276,7 @@ export default function LandingPage() {
               <p className="text-sm text-muted-foreground">
                 © 2025 ODOT. All rights reserved.
               </p>
-              <div className="flex items-center space-x-4 mt-4 md:mt-0">
-                <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                  <Github className="h-4 w-4" />
-                </Button>
-                <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                  <Twitter className="h-4 w-4" />
-                </Button>
-              </div>
+
             </div>
           </div>
         </div>
