@@ -58,5 +58,3 @@ docker run -p 3000:3000 odot-frontend
 ```
 
 ---
-
-Part of the ODOT todo application suite.

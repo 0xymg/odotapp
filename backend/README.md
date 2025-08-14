@@ -142,11 +142,23 @@ cd todo-service && npm test
 
 ```bash
 # Build and run individual services
-docker build -t user-service ./user-service
-docker build -t todo-service ./todo-service
+cd user-service
+docker build -t user-service .
+docker run -p 3001:3001 user-service
 
-# Or use compose for full stack
-docker-compose up --build
+cd todo-service
+docker build -t todo-service .
+docker run -p 3002:3002 todo-service
+
+# Backend services with Docker Compose
+cd backend
+docker-compose up -d          # Start backend services
+docker-compose down           # Stop backend services
+docker-compose ps             # Check service status
+docker-compose logs -f        # View logs
+
+# Stop and remove all backend containers/data
+docker-compose down --volumes --remove-orphans
 ```
 
 ## � Health Checks
