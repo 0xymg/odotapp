@@ -16,19 +16,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ODO - Think better, organize smarter",
+  title: "ODOT - Think better, organize smarter",
   description: "The only todo app that adapts to your thinking. Clean, fast, and distraction-free. Built for people who care about their productivity.",
   keywords: "todo, productivity, task management, notes, organization, planning",
-  authors: [{ name: "ODO Team" }],
+  authors: [{ name: "ODOT Team" }],
   openGraph: {
-    title: "ODO - Think better, organize smarter",
+    title: "ODOT - Think better, organize smarter",
     description: "The only todo app that adapts to your thinking. Clean, fast, and distraction-free.",
     type: "website",
-    siteName: "ODO"
+    siteName: "ODOT"
   },
   twitter: {
     card: "summary_large_image",
-    title: "ODO - Think better, organize smarter",
+    title: "ODOT - Think better, organize smarter",
     description: "The only todo app that adapts to your thinking. Clean, fast, and distraction-free."
   }
 };

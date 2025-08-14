@@ -173,8 +173,7 @@ export default function Dashboard() {
         <div className="flex h-14 items-center px-6">
           <div className="flex items-center space-x-3">
             <div className="flex items-center space-x-2">
-              <ListTodo className="h-4 w-4 text-muted-foreground" />
-              <span className="text-sm font-medium text-foreground">ODO</span>
+              <span className="text-sm font-medium text-foreground">ODOT</span>
             </div>
           </div>
           
@@ -266,6 +265,7 @@ export default function Dashboard() {
             <div className="flex space-x-3">
               <Plus className="h-4 w-4 text-muted-foreground mt-1 flex-shrink-0" />
               <input
+                ref={inputRef}
                 placeholder="Add a todo..."
                 value={newTodo}
                 onChange={(e) => setNewTodo(e.target.value)}

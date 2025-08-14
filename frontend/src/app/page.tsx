@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { CheckCircle, ListTodo, Users, Zap, Sparkles, Shield, Rocket, ArrowRight, Github, Twitter } from 'lucide-react';
+import { CheckCircle, Users, Zap, Sparkles, Shield, Rocket, ArrowRight, Github, Twitter } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
@@ -34,10 +34,7 @@ export default function LandingPage() {
         <div className="container-responsive py-4">
           <nav className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="p-2 rounded-lg bg-gradient-to-br from-primary/10 to-primary/5 border border-border">
-                <ListTodo className="h-5 w-5 text-primary" />
-              </div>
-              <span className="text-xl font-semibold text-foreground tracking-tight">ODO</span>
+              <span className="text-xl font-semibold text-foreground tracking-tight">ODOT</span>
             </div>
             <div className="flex items-center space-x-3">
               <ThemeToggle />
@@ -173,7 +170,7 @@ export default function LandingPage() {
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold text-foreground mb-4">
-                See ODO in action
+                See ODOT in action
               </h2>
               <p className="text-lg text-muted-foreground">
                 Experience the clean, intuitive interface that makes task management effortless.
@@ -224,7 +221,7 @@ export default function LandingPage() {
               Ready to transform your productivity?
             </h2>
             <p className="text-lg text-muted-foreground mb-12">
-              Join thousands of users who have already simplified their workflow with ODO.
+              Join thousands of users who have already simplified their workflow with ODOT.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-md mx-auto">
@@ -246,10 +243,7 @@ export default function LandingPage() {
             <div className="flex flex-col md:flex-row justify-between items-start space-y-8 md:space-y-0">
               <div className="flex flex-col space-y-4">
                 <div className="flex items-center space-x-3">
-                  <div className="p-2 rounded-lg bg-gradient-to-br from-primary/10 to-primary/5 border border-border">
-                    <ListTodo className="h-5 w-5 text-primary" />
-                  </div>
-                  <span className="text-xl font-semibold text-foreground">ODO</span>
+                  <span className="text-xl font-semibold text-foreground">ODOT</span>
                 </div>
                 <p className="text-sm text-muted-foreground max-w-md">
                   The simple, powerful todo app that adapts to your thinking. 
@@ -280,7 +274,7 @@ export default function LandingPage() {
             
             <div className="border-t border-border/40 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
               <p className="text-sm text-muted-foreground">
-                © 2025 ODO. All rights reserved.
+                © 2025 ODOT. All rights reserved.
               </p>
               <div className="flex items-center space-x-4 mt-4 md:mt-0">
                 <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
