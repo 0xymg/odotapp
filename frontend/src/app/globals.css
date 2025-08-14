@@ -143,13 +143,22 @@
     @apply hover:bg-muted/40 hover:shadow-sm;
   }
   
-  /* Notion button style */
+  /* Notion button style - Ghost variant */
   .notion-button {
     @apply inline-flex items-center px-3 py-1.5 text-sm;
-    @apply bg-background hover:bg-muted border border-border;
+    @apply bg-transparent hover:bg-muted/60 border border-transparent;
     @apply rounded-md transition-all duration-200;
-    @apply font-medium text-foreground;
-    @apply shadow-sm hover:shadow-md;
+    @apply font-medium text-muted-foreground hover:text-foreground;
+    @apply shadow-none hover:shadow-sm;
+    @apply cursor-pointer;
+  }
+
+  .notion-button:hover {
+    @apply border-border;
+  }
+
+  .notion-button:active {
+    @apply scale-95;
   }
 
   /* Notion input style */

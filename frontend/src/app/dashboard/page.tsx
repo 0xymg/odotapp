@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { todosApi } from '@/lib/api';
@@ -23,7 +23,8 @@ import {
   BarChart3,
   User,
   ListTodo,
-  Shield
+  Shield,
+  Users
 } from 'lucide-react';
 
 export default function Dashboard() {
@@ -39,6 +40,7 @@ export default function Dashboard() {
   const [creating, setCreating] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [todoToDelete, setTodoToDelete] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!isLoading && !user) {
@@ -85,6 +87,10 @@ export default function Dashboard() {
       fetchTodos();
       fetchStats();
       toast.success('Todo created successfully!');
+      // Keep focus on input after creating todo
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
     } catch (error: any) {
       toast.error(error.response?.data?.error || 'Failed to create todo');
     } finally {
@@ -180,8 +186,8 @@ export default function Dashboard() {
                 onClick={() => router.push('/admin')}
                 className="notion-button text-xs px-2 py-1"
               >
-                <Shield className="h-3 w-3 mr-1" />
-                Admin
+                <Users className="h-3 w-3 mr-1" />
+                Users
               </button>
             )}
             <ThemeToggle />

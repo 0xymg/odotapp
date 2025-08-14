@@ -123,7 +123,7 @@ export default function RegisterPage() {
                 />
                 <button 
                   type="submit" 
-                  className="notion-button w-full h-11 justify-center" 
+                  className="notion-button w-full h-11 justify-center bg-primary text-primary-foreground hover:bg-primary/90 border-primary hover:border-primary/90" 
                   disabled={isLoading}
                 >
                   {isLoading ? 'Creating Account...' : 'Create Account'}

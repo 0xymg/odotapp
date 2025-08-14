@@ -6,7 +6,6 @@ import { useAuth } from '@/contexts/AuthContext';
 import { adminApi } from '@/lib/api';
 import { User } from '@/types/auth';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -14,7 +13,6 @@ import { DeleteConfirmDialog } from '@/components/DeleteConfirmDialog';
 import { toast } from 'sonner';
 import { 
   Users, 
-  UserCog, 
   Trash2, 
   LogOut, 
   Shield,
@@ -126,13 +124,13 @@ export default function AdminDashboard() {
           <div className="flex items-center space-x-1">
             <button 
               onClick={() => router.push('/dashboard')}
-              className="notion-button text-xs px-2 py-1"
+              className="notion-button text-xs px-2 py-1 hover:bg-muted/60"
             >
               <ArrowLeft className="h-3 w-3 mr-1" />
               Dashboard
             </button>
             <ThemeToggle />
-            <button onClick={handleLogout} className="notion-button text-xs px-2 py-1">
+            <button onClick={handleLogout} className="notion-button text-xs px-2 py-1 hover:bg-muted/60">
               <LogOut className="h-3 w-3 mr-1" />
               Logout
             </button>
@@ -146,7 +144,7 @@ export default function AdminDashboard() {
         <div className="space-y-2">
           <div className="flex items-center space-x-2 text-muted-foreground text-sm">
             <Shield className="h-4 w-4" />
-            <span>{user.user_email}</span>
+            <span>{user?.user_email}</span>
           </div>
           <h1 className="notion-title">Admin Panel</h1>
           <p className="text-muted-foreground">User management and system administration</p>
@@ -192,69 +190,68 @@ export default function AdminDashboard() {
                   key={userItem.uuid}
                   className="group notion-block notion-hover flex items-center justify-between"
                 >
-                      <div className="flex items-center space-x-3">
-                        <div className="p-1.5 rounded-full bg-muted">
-                          <UserIcon className="h-4 w-4 text-muted-foreground" />
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <p className="text-sm font-medium text-foreground">
-                            {userItem.user_email}
-                          </p>
-                          <p className="text-xs text-muted-foreground truncate">
-                            {userItem.uuid}
-                          </p>
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-center space-x-3">
-                        {/* Role Badge */}
-                        <Badge variant={userItem.role === 'admin' ? 'default' : 'secondary'} className="text-xs">
-                          {userItem.role === 'admin' ? (
-                            <>
-                              <Shield className="h-3 w-3 mr-1" />
-                              Admin
-                            </>
-                          ) : (
-                            <>
-                              <UserIcon className="h-3 w-3 mr-1" />
-                              User
-                            </>
-                          )}
-                        </Badge>
-                        
-                        {/* Role Selector */}
-                        {userItem.uuid !== user.uuid && (
-                          <Select 
-                            value={userItem.role} 
-                            onValueChange={(value) => handleRoleChange(userItem.uuid, value)}
-                            disabled={updatingRole === userItem.uuid}
-                          >
-                            <SelectTrigger className="w-20 h-8 text-xs">
-                              <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="user">User</SelectItem>
-                              <SelectItem value="admin">Admin</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        )}
-
-                        {/* Delete Button */}
-                        {userItem.uuid !== user.uuid && (
-                          <Button
-                            size="sm"
-                            variant="ghost"
-                            onClick={() => openDeleteDialog(userItem)}
-                            className="h-7 w-7 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive/10 hover:text-destructive"
-                          >
-                            <Trash2 className="h-3.5 w-3.5" />
-                          </Button>
-                        )}
-                      </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="p-1.5 rounded-full bg-muted">
+                      <UserIcon className="h-4 w-4 text-muted-foreground" />
                     </div>
-                  ))
-              )}
-            </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-medium text-foreground">
+                        {userItem.user_email}
+                      </p>
+                      <p className="text-xs text-muted-foreground truncate">
+                        {userItem.uuid}
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center space-x-3">
+                    {/* Role Badge */}
+                    <Badge variant={userItem.role === 'admin' ? 'default' : 'secondary'} className="text-xs">
+                      {userItem.role === 'admin' ? (
+                        <>
+                          <Shield className="h-3 w-3 mr-1" />
+                          Admin
+                        </>
+                      ) : (
+                        <>
+                          <UserIcon className="h-3 w-3 mr-1" />
+                          User
+                        </>
+                      )}
+                    </Badge>
+                    
+                    {/* Role Selector */}
+                    {userItem.uuid !== user?.uuid && (
+                      <Select 
+                        value={userItem.role} 
+                        onValueChange={(value) => handleRoleChange(userItem.uuid, value)}
+                        disabled={updatingRole === userItem.uuid}
+                      >
+                        <SelectTrigger className="w-20 h-8 text-xs">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="user">User</SelectItem>
+                          <SelectItem value="admin">Admin</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    )}
+
+                    {/* Delete Button */}
+                    {userItem.uuid !== user?.uuid && (
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        onClick={() => openDeleteDialog(userItem)}
+                        className="h-7 w-7 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive/10 hover:text-destructive"
+                      >
+                        <Trash2 className="h-3.5 w-3.5" />
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>

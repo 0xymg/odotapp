@@ -42,12 +42,12 @@ export default function LandingPage() {
             <div className="flex items-center space-x-3">
               <ThemeToggle />
               <Link href="/login">
-                <Button variant="ghost" size="sm" className="text-sm notion-hover">
+                <Button variant="ghost" size="sm" className="text-sm hover:bg-muted/60">
                   Sign In
                 </Button>
               </Link>
               <Link href="/register">
-                <Button size="sm" className="text-sm shadow-sm">
+                <Button size="sm" className="text-sm shadow-sm hover:shadow-md transition-all duration-200">
                   Get Started
                   <ArrowRight className="ml-1 h-3 w-3" />
                 </Button>
